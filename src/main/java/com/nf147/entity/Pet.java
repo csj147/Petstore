@@ -13,6 +13,26 @@ public class Pet {
 
     private String status;
 
+    private Category category;
+
+    private Tag tag;
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Tag getTag() {
+        return tag;
+    }
+
+    public void setTag(Tag tag) {
+        this.tag = tag;
+    }
+
     public Integer getPet_id() {
         return pet_id;
     }

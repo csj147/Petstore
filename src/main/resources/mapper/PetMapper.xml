@@ -8,6 +8,17 @@
     <result column="Pet_photoUrls" jdbcType="VARCHAR" property="pet_photoUrls" />
     <result column="tag_id" jdbcType="INTEGER" property="tag_id" />
     <result column="status" jdbcType="VARCHAR" property="status" />
+
+    <!--column 是数据库中字段， property是实体类中字段-->
+    <association property="category" javaType="Category">
+      <id column="c_id" jdbcType="INTEGER" property="c_id" />
+      <result column="c_name" jdbcType="VARCHAR" property="c_name" />
+    </association>
+
+    <association property="tag" javaType="Tag">
+      <id column="tag_id" jdbcType="INTEGER" property="t_id" />
+      <result column="tag_name" jdbcType="VARCHAR" property="t_name" />
+    </association>
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from pet
@@ -38,5 +49,16 @@
   <select id="selectAll" resultMap="BaseResultMap">
     select Pet_id, category_id, Pet_name, Pet_photoUrls, tag_id, status
     from pet
+  </select>
+  <select id="select_join" resultMap="BaseResultMap">
+  select p.pet_id ,p.pet_name , c.c_name , t.tag_name , p.status,p.Pet_photoUrls
+  from Pet p,category c,tag t
+  where p.category_Id = c.c_id and p.tag_Id = t.tag_id group by p.Pet_id;
+  </select>
+
+  <select id="select_id" resultMap="BaseResultMap"  parameterType="java.lang.Integer">
+  select p.pet_id ,p.pet_name , c.c_name , t.tag_name , p.status,p.Pet_photoUrls
+  from Pet p,category c,tag t
+  where p.category_Id = c.c_id and p.tag_Id = t.tag_id and c_id = #{c_id,jdbcType=INTEGER};
   </select>
 </mapper>

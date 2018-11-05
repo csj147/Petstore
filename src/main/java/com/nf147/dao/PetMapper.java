@@ -13,4 +13,8 @@ public interface PetMapper {
     List<Pet> selectAll();
 
     int updateByPrimaryKey(Pet record);
+
+    List<Pet> select_join();
+
+    List<Pet> select_id(Integer c_id);
 }
